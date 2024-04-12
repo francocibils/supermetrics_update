@@ -27,7 +27,8 @@ if app_mode == 'Amazon Sellerboard':
         amz_listing_df = pd.read_excel(amz_listing, engine = 'openpyxl')
         st.success('Amazon listing uploaded successfully.')
     else:
-        amz_listing_df = pd.read_excel(r'.\Datasets\amazon_sku_listado.xlsx', engine = 'openpyxl')
+        path = 'https://raw.githubusercontent.com/francocibils/supermetrics_update/main/amazon_sku_listado.xlsx'
+        amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
         st.info('Default Amazon listing used.')
 
     if st.button('Process file'):
@@ -72,7 +73,8 @@ if app_mode == 'Amazon Sellercentral':
         amz_listing_df = pd.read_excel(amz_listing, engine = 'openpyxl')
         st.success('Amazon listing uploaded successfully.')
     else:
-        amz_listing_df = pd.read_excel(r'.\Datasets\amazon_sku_listado.xlsx', engine = 'openpyxl')
+        path = 'https://raw.githubusercontent.com/francocibils/supermetrics_update/main/amazon_sku_listado.xlsx'
+        amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
         st.info('Default Amazon listing used.')
 
     if st.button('Process file'):
