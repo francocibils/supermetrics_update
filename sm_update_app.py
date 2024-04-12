@@ -34,8 +34,6 @@ if app_mode == 'Amazon Sellerboard':
     if st.button('Process file'):
         if amz_file is None:
             raise ValueError('Amazon Sellerboard file has not been provided, please provide one.')
-        elif amz_listing is None:
-            raise ValueError('Amazon SKU listing file has not been provided, please provide one.')
         
         amz_grouped_df, amz_na_df = processing_amazon_sellerboard(amz_df = amz_df, amz_listing_df = amz_listing_df)
 
@@ -82,8 +80,6 @@ if app_mode == 'Amazon Sellercentral':
     if st.button('Process file'):
         if amz_file is None:
             raise ValueError('Amazon Sellerboard file has not been provided, please provide one.')
-        elif amz_listing is None:
-            raise ValueError('Amazon SKU listing file has not been provided, please provide one.')
 
         amz_grouped_df, amz_na_df = processing_amazon_sellercentral(amz_df = amz_df, amz_listing_df = amz_listing_df)
 
