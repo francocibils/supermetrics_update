@@ -1,7 +1,5 @@
 import pandas as pd
 import streamlit as st
-import xlrd
-import openpyxl
 
 from helper_functions import *
 
@@ -28,15 +26,17 @@ if app_mode == 'Amazon Sellerboard':
     if amz_listing is not None:
         amz_listing_df = pd.read_excel(amz_listing, engine = 'openpyxl')
         st.success('Amazon listing uploaded successfully.')
-    else:
-        path = 'https://raw.githubusercontent.com/francocibils/supermetrics_update/main/amazon_sku_listado.xlsx'
-        amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
-        st.info('Default Amazon listing used.')
+    # else:
+    #     path = 'https://raw.githubusercontent.com/francocibils/supermetrics_update/main/amazon_sku_listado.xlsx'
+    #     amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
+    #     st.info('Default Amazon listing used.')
 
     if st.button('Process file'):
         if amz_file is None:
             raise ValueError('Amazon Sellerboard file has not been provided, please provide one.')
-
+        elif amz_listing is None:
+            raise ValueError('Amazon SKU listing file has not been provided, please provide one.')
+        
         amz_grouped_df, amz_na_df = processing_amazon_sellerboard(amz_df = amz_df, amz_listing_df = amz_listing_df)
 
         st.header('Processed data')
@@ -74,14 +74,16 @@ if app_mode == 'Amazon Sellercentral':
     if amz_listing is not None:
         amz_listing_df = pd.read_excel(amz_listing, engine = 'openpyxl')
         st.success('Amazon listing uploaded successfully.')
-    else:
-        path = 'https://raw.githubusercontent.com/francocibils/supermetrics_update/main/amazon_sku_listado.xlsx'
-        amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
-        st.info('Default Amazon listing used.')
+    # else:
+    #     path = 'https://raw.githubusercontent.com/francocibils/supermetrics_update/main/amazon_sku_listado.xlsx'
+    #     amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
+    #     st.info('Default Amazon listing used.')
 
     if st.button('Process file'):
         if amz_file is None:
-            raise ValueError('Amazon Sellercentral file has not been provided, please provide one.')
+            raise ValueError('Amazon Sellerboard file has not been provided, please provide one.')
+        elif amz_listing is None:
+            raise ValueError('Amazon SKU listing file has not been provided, please provide one.')
 
         amz_grouped_df, amz_na_df = processing_amazon_sellercentral(amz_df = amz_df, amz_listing_df = amz_listing_df)
 
