@@ -45,8 +45,15 @@ def processing_amazon_sellercentral(amz_df, amz_listing_df, date = False):
     else:
         amz_df = amz_df[['ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Vistas de página: total']]
 
-    amz_df['Sesiones: total'] = amz_df['Sesiones: total'].str.replace(',', '').astype(int)
-    amz_df['Vistas de página: total'] = amz_df['Vistas de página: total'].str.replace(',', '').astype(int)
+    try:
+        amz_df['Sesiones: total'] = amz_df['Sesiones: total'].str.replace(',', '').astype(int)
+    except:
+        pass
+
+    try:
+        amz_df['Vistas de página: total'] = amz_df['Vistas de página: total'].str.replace(',', '').astype(int)
+    except:
+        pass
 
     amz_listing_merge = amz_listing_df[['SKU', 'Brand', 'Type of product']]
     amz_df = pd.merge(amz_df, amz_listing_merge, on = 'SKU', how = 'left').drop_duplicates()
