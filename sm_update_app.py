@@ -31,11 +31,13 @@ if app_mode == 'Amazon Sellerboard':
         amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
         st.info('Default Amazon listing used.')
 
+    date_checkbox = st.checkbox('Date available in files (please name column as "FECHA").')
+
     if st.button('Process file'):
         if amz_file is None:
             raise ValueError('Amazon Sellerboard file has not been provided, please provide one.')
         
-        amz_grouped_df, amz_na_df = processing_amazon_sellerboard(amz_df = amz_df, amz_listing_df = amz_listing_df)
+        amz_grouped_df, amz_na_df = processing_amazon_sellerboard(amz_df = amz_df, amz_listing_df = amz_listing_df, date = date_checkbox)
 
         st.header('Processed data')
         st.success('Amazon file has been processed successfully.')
@@ -77,11 +79,13 @@ if app_mode == 'Amazon Sellercentral':
         amz_listing_df = pd.read_excel(path, engine = 'openpyxl')
         st.info('Default Amazon listing used.')
 
+    date_checkbox = st.checkbox('Date available in files (please name column as "FECHA").')
+
     if st.button('Process file'):
         if amz_file is None:
             raise ValueError('Amazon Sellerboard file has not been provided, please provide one.')
 
-        amz_grouped_df, amz_na_df = processing_amazon_sellercentral(amz_df = amz_df, amz_listing_df = amz_listing_df)
+        amz_grouped_df, amz_na_df = processing_amazon_sellercentral(amz_df = amz_df, amz_listing_df = amz_listing_df, date = date_checkbox)
 
         st.header('Processed data')
         st.success('Amazon file has been processed successfully.')
