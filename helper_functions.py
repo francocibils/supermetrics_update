@@ -41,9 +41,9 @@ def processing_amazon_sellercentral(amz_df, amz_listing_df, date = False):
     amz_listing_df = amz_listing_df.rename(columns = {'PRODUCTO': 'Type of product', 'BRAND': 'Brand'})
 
     if date:
-        amz_df = amz_df[['FECHA', 'ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Vistas de página: total']]
+        amz_df = amz_df[['FECHA', 'ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Visitas: total']]
     else:
-        amz_df = amz_df[['ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Vistas de página: total']]
+        amz_df = amz_df[['ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Visitas: total']]
 
     try:
         amz_df['Sesiones: total'] = amz_df['Sesiones: total'].str.replace(',', '').astype(int)
@@ -51,7 +51,7 @@ def processing_amazon_sellercentral(amz_df, amz_listing_df, date = False):
         pass
 
     try:
-        amz_df['Vistas de página: total'] = amz_df['Vistas de página: total'].str.replace(',', '').astype(int)
+        amz_df['Visitas: total'] = amz_df['Visitas: total'].str.replace(',', '').astype(int)
     except:
         pass
 
@@ -61,10 +61,10 @@ def processing_amazon_sellercentral(amz_df, amz_listing_df, date = False):
     na_mask = amz_df['Brand'].isna() | amz_df['Type of product'].isna()
 
     if date:
-        amz_na_df = amz_df[na_mask][['FECHA', 'ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Vistas de página: total']]
-        amz_grouped_df = amz_df.groupby(['FECHA', 'Brand', 'Type of product'])[['Sesiones: total', 'Vistas de página: total']].sum()
+        amz_na_df = amz_df[na_mask][['FECHA', 'ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Visitas: total']]
+        amz_grouped_df = amz_df.groupby(['FECHA', 'Brand', 'Type of product'])[['Sesiones: total', 'Visitas: total']].sum()
     else:
-        amz_na_df = amz_df[na_mask][['ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Vistas de página: total']]
-        amz_grouped_df = amz_df.groupby(['Brand', 'Type of product'])[['Sesiones: total', 'Vistas de página: total']].sum()
+        amz_na_df = amz_df[na_mask][['ASIN (parent)', 'ASIN (child)', 'Título', 'SKU', 'Sesiones: total', 'Visitas: total']]
+        amz_grouped_df = amz_df.groupby(['Brand', 'Type of product'])[['Sesiones: total', 'Visitas: total']].sum()
 
     return amz_grouped_df, amz_na_df
